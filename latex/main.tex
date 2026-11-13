@@ -1,0 +1,36 @@
+% main.tex: the document, the same for every CV, language and style.
+% Which CV it compiles is chosen in config.tex (in a LaTeX editor, edit only that file).
+% scripts/build.py writes config.tex, languages/ and content/ (the data, already in LaTeX).
+% Each style draws the sections (header.tex, sections.tex) and places them (layout.tex).
+
+\documentclass[11pt,a4paper]{article}
+
+\input{config.tex}
+\input{languages/\Lang.tex}
+
+\usepackage{iftex}
+\ifPDFTeX                          % pdflatex: these fonts; XeLaTeX styles load their own
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+    \usepackage{lmodern}
+\fi
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[margin=2cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.05}
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{colorlinks=true, linkcolor=black, urlcolor=blue, pageanchor=false}
+
+\input{styles/\Style/header.tex}
+\input{styles/\Style/sections.tex}
+\input{styles/\Style/layout.tex}
+\input{content/\CV-\Lang.tex}
+
+\begin{document}
+
+    \RenderCV
+
+\end{document}

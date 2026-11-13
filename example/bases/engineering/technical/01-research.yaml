@@ -1,0 +1,10 @@
+title:
+  pt: Iniciação Científica — Pipeline de Dados
+  en: Undergraduate Research — Data Pipeline
+bullets:
+  pt:
+    - Automatizei a coleta e a limpeza de dados de saúde pública com Python.
+    - Organizei os dados em um banco PostgreSQL usado por toda a equipe.
+  en:
+    - Automated the collection and cleaning of public health data with Python.
+    - Organized the data in a PostgreSQL database used by the whole team.

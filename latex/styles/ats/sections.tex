@@ -1,0 +1,98 @@
+% latex/styles/ats/sections.tex
+% The sections below the header, in the same look: the title in navy small caps over a
+% thin grey rule, the text in a dark grey that reads well on screen and on paper.
+% The titles come from languages/<lang>.tex (\LabelSummary, ...), the text from content/.
+
+\definecolor{cvtext}{HTML}{1F2937}
+
+\RequirePackage{needspace}
+
+% \cvsection{title}: a section title and its rule. It never ends a page alone: it needs room
+% for itself and the first lines below (a long CV goes on to a second page).
+\newcommand{\cvsection}[1]{%
+    \par\needspace{6\baselineskip}\vspace{0.9em}%
+    {\fontsize{13}{15}\selectfont\scshape\color{cvname}#1}\par
+    \vspace{0.1em}%
+    {\color{cvrule}\rule{\linewidth}{0.6pt}}\par
+    \vspace{0.3em}%
+}
+
+\newcommand{\RenderSummary}{%
+    \cvsection{\LabelSummary}
+    {\fontsize{10}{14}\selectfont\color{cvtext}\Summary\par}%
+}
+
+% \cvexperience{title}{period}{where}{mode}{\item ... \item ...}
+\newcommand{\cvexperience}[5]{%
+    \par\needspace{4\baselineskip}\noindent{\fontsize{10.5}{13}\selectfont\bfseries\color{cvname}#1}\hfill
+    {\fontsize{9}{13}\selectfont\color{cvmuted}#2}\par
+    {\fontsize{9.5}{12}\selectfont\color{cvaccent}#3{\color{cvmuted}\cvtitlesep#4}}\par
+    \begin{itemize}[leftmargin=1.2em, itemsep=0.15em, topsep=0.25em, parsep=0pt,
+                    label={\color{cvaccent}\textbullet}]
+        \fontsize{9.5}{12.5}\selectfont\color{cvtext}#5
+    \end{itemize}
+    \vspace{0.5em}%
+}
+
+% each section only appears if the CV has items of that kind
+\newcommand{\RenderTechnical}{%
+    \ifx\TechnicalItems\empty\else
+        \cvsection{\TechnicalTitle}
+        \TechnicalItems
+    \fi
+}
+\newcommand{\RenderProfessional}{%
+    \ifx\ProfessionalItems\empty\else
+        \cvsection{\ProfessionalTitle}
+        \ProfessionalItems
+    \fi
+}
+
+% \cveducation{degree}{years}{institution}{description}
+\newcommand{\cveducation}[4]{%
+    \par\needspace{3\baselineskip}\noindent{\fontsize{10.5}{13}\selectfont\bfseries\color{cvname}#1}\hfill
+    {\fontsize{9}{13}\selectfont\color{cvmuted}#2}\par
+    {\fontsize{9.5}{12}\selectfont\color{cvaccent}#3}\par
+    {\fontsize{9.5}{12.5}\selectfont\color{cvtext}#4\par}%
+    \vspace{0.5em}%
+}
+\newcommand{\RenderEducation}{%
+    \ifx\EducationItems\empty\else
+        \cvsection{\LabelEducation}
+        \EducationItems
+    \fi
+}
+
+% languages: one line, separated by "·" (Inglês (B2) · LIBRAS)
+\newif\ifcvfirstlang
+\newcommand{\cvlanguage}[1]{\ifcvfirstlang\cvfirstlangfalse\else\cvtitlesep\fi#1}
+\newcommand{\RenderLanguages}{%
+    \ifx\LanguagesItems\empty\else
+        \cvsection{\LabelLanguages}
+        {\fontsize{10}{14}\selectfont\color{cvtext}\cvfirstlangtrue\LanguagesItems\par}%
+    \fi
+}
+
+% \cvskill{name}{skills}: one line per group, the name in bold (plain text, read well by an ATS)
+\newcommand{\cvskill}[2]{%
+    \par\noindent{\fontsize{9.5}{12.5}\selectfont\color{cvtext}\textbf{\color{cvname}#1:}\ #2\par}%
+    \vspace{0.25em}%
+}
+\newcommand{\RenderSkills}{%
+    \cvsection{\LabelSkills}
+    \SkillsItems
+}
+
+% \cvproject{name}{link}{shown link}{description}: the name in bold, the link on the right
+\newcommand{\cvproject}[4]{%
+    \par\needspace{3\baselineskip}\noindent{\fontsize{10.5}{13}\selectfont\bfseries\color{cvname}#1}\hfill
+    {\fontsize{9}{13}\selectfont\href{#2}{\color{cvaccent}#3}}\par
+    {\fontsize{9.5}{12.5}\selectfont\color{cvtext}#4\par}%
+    \vspace{0.5em}%
+}
+\newcommand{\RenderProjects}{%
+    \ifx\ProjectsItems\empty\else
+        \cvsection{\LabelProjects}
+        \ProjectsItems
+    \fi
+}

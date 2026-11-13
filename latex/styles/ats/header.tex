@@ -1,0 +1,45 @@
+% latex/styles/ats/header.tex
+% For application sites (ATS) and for people: one column, real text only (the icons are
+% small drawings next to the text, never instead of it). The name in navy small caps
+% with an accent bar beside it, the titles in blue italics separated by "·", location
+% and phone on one line, and the e-mail and links with icons on the next one (the
+% short address is shown, not the label).
+
+\RequirePackage{microtype}
+\input{icons.tex}
+
+\definecolor{cvname}{HTML}{0F172A}
+\definecolor{cvaccent}{HTML}{1D4ED8}
+\definecolor{cvmuted}{HTML}{5C616E}
+\definecolor{cvrule}{HTML}{D9DADD}
+\definecolor{cvlink}{HTML}{334155}
+
+\hypersetup{urlcolor=cvlink}
+
+% a light "|" between location and phone
+\newcommand{\cvsep}{\hspace{0.5em}{\color{cvrule}\textup{|}}\hspace{0.5em}}
+\newcommand{\cvtitlesep}{\;\textup{·}\;}
+\newcommand{\cvlinksep}{\hspace{1.4em}}
+
+% \cvcontact{icon}{url}{label}{text}: icon (if any) + the short address, linked
+\newcommand{\cvcontact}[4]{\href{#2}{%
+    \if\relax\detokenize{#1}\relax\else{\color{cvaccent}\cvicon{#1}}\hspace{0.35em}\fi#4}}
+
+\newsavebox{\cvhdrbox}
+
+\newcommand{\RenderHeader}{%
+    \savebox{\cvhdrbox}{\begin{minipage}[t]{\dimexpr\textwidth-12.2pt\relax}\raggedright
+        {\fontsize{24}{28}\selectfont\scshape\color{cvname} \HeaderName}\par
+        \vspace{0.3em}%
+        {\hyphenpenalty=10000\fontsize{10}{13}\selectfont\itshape\color{cvaccent}\HeaderTitles\par}%
+        \vspace{0.55em}%
+        \ifx\HeaderMeta\empty\else
+            {\fontsize{9}{11.5}\selectfont\color{cvmuted}\HeaderMeta\par}%
+            \vspace{0.25em}%
+        \fi
+        {\fontsize{9}{11.5}\selectfont\HeaderLinks\par}%
+    \end{minipage}}%
+    \noindent{\color{cvaccent}\rule[-\dp\cvhdrbox]{2.2pt}{\dimexpr\ht\cvhdrbox+\dp\cvhdrbox\relax}}%
+    \hspace{10pt}\usebox{\cvhdrbox}\par
+    \vspace{0.5cm}%
+}

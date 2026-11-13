@@ -1,0 +1,42 @@
+% latex/styles/fancy/layout.tex
+% The page: the navy block (painted behind the page, with its glow and dot grid), the name and
+% pills on it, the floating card (summary + contacts), then the sections in one full-width
+% column (the experiences need the width to fit one page).
+
+\RequirePackage{eso-pic}
+\newlength{\cvhero}\setlength{\cvhero}{6.05cm}
+
+\AddToShipoutPictureBG*{\AtPageUpperLeft{%
+    \begin{tikzpicture}[overlay]
+        \fill[cvname] (0,0) rectangle (\paperwidth,-\cvhero);
+        \begin{scope}
+            \clip (0,0) rectangle (\paperwidth,-\cvhero);
+            % a soft glow: concentric circles from navy to blue (no transparency needed)
+            \foreach \i in {0,...,24}{
+                \pgfmathsetmacro{\r}{7.6-\i*0.29}
+                \pgfmathsetmacro{\m}{\i*2.6}
+                \fill[cvaccent!\m!cvname] (\paperwidth-0.6cm,0.4cm) circle (\r cm);}
+            \foreach \x in {0,...,9}{\foreach \y in {0,...,9}{
+                \fill[cvpale!50!cvname] (\paperwidth-1.85cm-\x*0.42cm,-1.55cm-\y*0.42cm) circle (0.6pt);}}
+        \end{scope}
+    \end{tikzpicture}}}
+
+\AtBeginDocument{\newgeometry{left=1.7cm, right=1.7cm, top=1.55cm, bottom=1.4cm}}
+
+\newcommand{\RenderCV}{%
+    \RenderHeader
+    \vspace{1.05cm}%
+    \begin{tcolorbox}[enhanced, colback=white, colframe=white, arc=7pt, boxrule=0pt,
+            left=13pt, right=13pt, top=11pt, bottom=11pt,
+            shadow={0mm}{-1.3mm}{-0.4mm}{fill=cvname!7}]
+        \begin{minipage}[t]{0.63\linewidth}\RenderSummary\end{minipage}%
+        \hfill{\color{cvrule}\vrule width 0.6pt}\hfill
+        \begin{minipage}[t]{0.32\linewidth}
+            {\fontsize{8.5}{11}\selectfont\color{cvlink}\hypersetup{urlcolor=cvlink}%
+             \HeaderLinks\par\vspace{0.25em}\HeaderMeta\par}%
+        \end{minipage}
+    \end{tcolorbox}
+    \vspace{0.2em}%
+    \RenderTechnical\RenderProfessional\RenderProjects\RenderEducation\RenderSkills\RenderLanguages
+}
+\hyphenpenalty=10000 \exhyphenpenalty=10000

@@ -1,0 +1,10 @@
+analysis:
+  skills:
+    pt: Análise Exploratória (EDA), Dashboards de KPIs, Análise de Coortes
+    en: Exploratory Analysis (EDA), KPI Dashboards, Cohort Analysis
+tools:
+experiments:
+  name: Experimentação, Experimentation
+  skills:
+    pt: Testes A/B, Inferência Causal, Cálculo de Tamanho de Amostra
+    en: A/B Testing, Causal Inference, Sample Size Calculation

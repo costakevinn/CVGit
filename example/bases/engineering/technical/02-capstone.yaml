@@ -1,0 +1,10 @@
+title:
+  pt: Trabalho de Conclusão — Data Warehouse
+  en: Capstone Project — Data Warehouse
+bullets:
+  pt:
+    - Modelei um data warehouse em esquema estrela para os dados de uma operadora.
+    - Construí o ETL com Python e SQL, com testes de qualidade dos dados.
+  en:
+    - Modeled a star-schema data warehouse for a telecom company's data.
+    - Built the ETL with Python and SQL, with data quality tests.

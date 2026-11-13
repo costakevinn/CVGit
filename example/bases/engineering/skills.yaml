@@ -1,0 +1,11 @@
+langs:
+  name: Linguagens, Programming Languages
+  skills: Python, SQL, Bash
+data-eng:
+  name: Engenharia de Dados, Data Engineering
+  skills:
+    pt: Pipelines ETL, Data Warehouse, Modelagem de Dados, Testes de Qualidade de Dados
+    en: ETL Pipelines, Data Warehouse, Data Modeling, Data Quality Testing
+tools:
+  name: Ferramentas & Infraestrutura, Tools & Infrastructure
+  skills: PostgreSQL, Airflow, Docker, Git, Linux

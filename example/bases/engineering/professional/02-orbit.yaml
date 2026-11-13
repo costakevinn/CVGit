@@ -1,0 +1,12 @@
+title:
+  pt: Estagiário de Engenharia de Dados
+  en: Data Engineering Intern
+bullets:
+  pt:
+    - Desenvolvi rotinas de ingestão de dados de rastreamento de entregas via API.
+    - Automatizei cargas diárias com Docker e agendamento de tarefas.
+    - Documentei fontes e tabelas para facilitar o uso pelas outras equipes.
+  en:
+    - Developed ingestion routines for delivery tracking data via API.
+    - Automated daily loads with Docker and job scheduling.
+    - Documented sources and tables to make them easier for other teams to use.

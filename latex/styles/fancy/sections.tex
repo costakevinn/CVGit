@@ -1,0 +1,115 @@
+% latex/styles/fancy/sections.tex
+% Section titles: a short blue bar and spaced capitals. Experiences on a timeline: a blue ring
+% for each one, a thin line joining them, and the period in a pale blue pill on the right.
+
+\RequirePackage{needspace}
+
+% a section title never ends a page alone: no page break between it and its first item
+\newcommand{\cvsection}[1]{%
+    \par\vspace{1.1em}%
+    \noindent{\color{cvaccent}\rule[0.22em]{1.1em}{2.4pt}}\hspace{0.55em}%
+    {\cvspaced\fontsize{8.6}{11}\selectfont\color{cvname}\MakeUppercase{#1}}\par\nopagebreak
+    \vspace{0.75em}\nopagebreak
+}
+
+\newcommand{\cvdatepill}[1]{\tikz[baseline=(d.base)]\node[fill=cvpill, rounded corners=6pt,
+    inner xsep=5.5pt, inner ysep=2.2pt, text=cvaccent,
+    font=\cvsemi\fontsize{7.8}{9}\selectfont](d){#1};}
+
+% one item of the timeline: its box (#1) with the ring and the line on its left
+\newsavebox{\cvitembox}
+\newlength{\cvtl}\setlength{\cvtl}{1.45em}
+\newcommand{\cvtimeline}{%
+    \par\noindent
+    \makebox[\cvtl][l]{\tikz[overlay]{%
+        \draw[cvrule!80!cvaccent!30, line width=1.1pt] (0.42em,0.32em) -- ++(0,-\dp\cvitembox-1.25em);
+        \draw[cvaccent, fill=white, line width=1.6pt] (0.42em,0.32em) circle (0.36em);}}%
+    \usebox{\cvitembox}\par
+    \vspace{0.95em}%
+}
+
+% \cvexperience{title}{period}{where}{mode}{\item ... \item ...}
+\newcommand{\cvexperience}[5]{%
+    \savebox{\cvitembox}{\begin{minipage}[t]{\dimexpr\linewidth-\cvtl\relax}
+        \parbox[t]{\dimexpr\linewidth-9.6em\relax}{\raggedright\cvsemi\fontsize{10.6}{13}\selectfont\color{cvname}#1}%
+        \hfill\cvdatepill{#2}\par
+        \vspace{0.15em}%
+        {\fontsize{8.8}{11}\selectfont\color{cvmuted}#3\cvsep#4}\par
+        \begin{itemize}[leftmargin=1.05em, itemsep=0.12em, topsep=0.35em, parsep=0pt,
+                        label={\color{cvaccent}\small\textbullet}]
+            \raggedright\fontsize{9}{12}\selectfont\color{cvtext}#5
+        \end{itemize}
+    \end{minipage}}%
+    \cvtimeline
+}
+
+% \cveducation{degree}{years}{institution}{description}: on the same timeline, no bullets
+\newcommand{\cveducation}[4]{%
+    \savebox{\cvitembox}{\begin{minipage}[t]{\dimexpr\linewidth-\cvtl\relax}
+        \parbox[t]{\dimexpr\linewidth-9.6em\relax}{\raggedright\cvsemi\fontsize{10.6}{13}\selectfont\color{cvname}#1}%
+        \hfill\cvdatepill{#2}\par
+        \vspace{0.15em}%
+        {\fontsize{8.8}{11}\selectfont\color{cvmuted}#3}\par
+        \vspace{0.3em}%
+        {\raggedright\fontsize{9}{12}\selectfont\color{cvtext}#4\par}
+    \end{minipage}}%
+    \cvtimeline
+}
+
+% each section only appears if the CV has items of that kind
+\newcommand{\RenderTechnical}{%
+    \ifx\TechnicalItems\empty\else
+        \cvsection{\TechnicalTitle}
+        \TechnicalItems
+    \fi
+}
+\newcommand{\RenderProfessional}{%
+    \ifx\ProfessionalItems\empty\else
+        \cvsection{\ProfessionalTitle}
+        \ProfessionalItems
+    \fi
+}
+\newcommand{\RenderEducation}{%
+    \ifx\EducationItems\empty\else
+        \cvsection{\LabelEducation}
+        \EducationItems
+    \fi
+}
+
+\newcommand{\RenderSummary}{{\raggedright\fontsize{10}{14.2}\selectfont\color{cvtext}\Summary\par}}
+
+% languages: one line of pills (Inglês (B2)  LIBRAS)
+\newcommand{\cvlanguage}[1]{\tikz[baseline=(l.base)]\node[fill=cvpill, rounded corners=6pt, inner xsep=6pt,
+    inner ysep=2.4pt, text=cvname, font=\fontsize{8.6}{10}\selectfont](l){#1};\hspace{0.4em}}
+\newcommand{\RenderLanguages}{%
+    \ifx\LanguagesItems\empty\else
+        \cvsection{\LabelLanguages}
+        \noindent\LanguagesItems\par
+    \fi
+}
+
+% \cvskill{name}{skills}: one line per group, the name in blue
+\newcommand{\cvskill}[2]{%
+    \par\noindent{\raggedright\fontsize{9}{12.4}\selectfont\color{cvtext}{\cvsemi\color{cvaccent}#1}\hspace{0.6em}#2\par}%
+    \vspace{0.35em}%
+}
+\newcommand{\RenderSkills}{%
+    \cvsection{\LabelSkills}
+    \SkillsItems
+}
+
+% \cvproject{name}{link}{shown link}{description}: the name, the link in blue beside it
+\newcommand{\cvproject}[4]{%
+    \par\needspace{3\baselineskip}\noindent
+    {\cvsemi\fontsize{10.2}{13}\selectfont\color{cvname}#1}\hspace{0.7em}%
+    {\fontsize{8.4}{13}\selectfont\href{#2}{\color{cvaccent}#3}}\par
+    \vspace{0.1em}%
+    {\raggedright\fontsize{9}{12}\selectfont\color{cvtext}#4\par}%
+    \vspace{0.6em}%
+}
+\newcommand{\RenderProjects}{%
+    \ifx\ProjectsItems\empty\else
+        \cvsection{\LabelProjects}
+        \ProjectsItems
+    \fi
+}

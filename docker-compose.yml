@@ -1,0 +1,9 @@
+services:
+  cv:
+    build: .
+    image: cvgit
+    user: "${CVGIT_UID:-1000}:${CVGIT_GID:-1000}"
+    environment:
+      HOME: /tmp            # LaTeX font cache
+    volumes:
+      - .:/app

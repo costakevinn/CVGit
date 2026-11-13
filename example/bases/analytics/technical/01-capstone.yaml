@@ -1,0 +1,10 @@
+title:
+  pt: Trabalho de Conclusão — Análise de Churn
+  en: Capstone Project — Churn Analysis
+bullets:
+  pt:
+    - Analisei a base de clientes de uma operadora para entender os fatores de cancelamento.
+    - Construí um dashboard em Power BI com as métricas de retenção por segmento.
+  en:
+    - Analyzed a telecom customer base to understand the drivers of churn.
+    - Built a Power BI dashboard with retention metrics by segment.

@@ -1,0 +1,11 @@
+langs:
+  name: Linguagens, Programming Languages
+  skills: Python, SQL, R
+analysis:
+  name: Análise de Dados & BI, Data Analysis & BI
+  skills:
+    pt: Análise Exploratória (EDA), Dashboards de KPIs, Testes A/B, Segmentação de Clientes
+    en: Exploratory Analysis (EDA), KPI Dashboards, A/B Testing, Customer Segmentation
+tools:
+  name: Ferramentas, Tools
+  skills: Pandas, Power BI, Excel, Git

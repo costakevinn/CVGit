@@ -1,0 +1,9 @@
+# your real data: never in this public repository (keep it in a private copy)
+data/
+# generated PDFs and the Overleaf project
+dist/
+# optional personal helper (e.g. build and copy the PDFs somewhere)
+deploy.sh
+# Python
+__pycache__/
+*.pyc

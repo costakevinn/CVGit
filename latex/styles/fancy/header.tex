@@ -1,0 +1,46 @@
+% latex/styles/fancy/header.tex  (XeLaTeX: needs the Inter font)
+% "Showcase": a navy block across the top with a soft blue glow and a dot grid, the name in
+% heavy white type and the titles as outlined pills. The summary and the contacts go in a
+% white card that floats over the bottom of the block (layout.tex places everything).
+
+\RequirePackage{fontspec}
+\RequirePackage{tikz}
+\RequirePackage[most]{tcolorbox}
+\input{icons.tex}
+
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Inter}[Contextuals=NoAlternate]
+% heavier cuts when the system has them; plain bold otherwise
+\IfFontExistsTF{Inter ExtraBold}{\newfontfamily\cvheavy{Inter ExtraBold}[Contextuals=NoAlternate]}{\newcommand{\cvheavy}{\bfseries}}
+\IfFontExistsTF{Inter SemiBold}{\newfontfamily\cvsemi{Inter SemiBold}[Contextuals=NoAlternate]}{\newcommand{\cvsemi}{\bfseries}}
+\newcommand{\cvspaced}{\bfseries\addfontfeature{LetterSpace=18}}
+
+\definecolor{cvname}{HTML}{0B1A33}
+\definecolor{cvaccent}{HTML}{2563EB}
+\definecolor{cvmuted}{HTML}{6B7387}
+\definecolor{cvrule}{HTML}{E6E9EF}
+\definecolor{cvlink}{HTML}{3B4457}
+\definecolor{cvtext}{HTML}{2A3344}
+\definecolor{cvpale}{HTML}{DBEAFE}
+\definecolor{cvpill}{HTML}{EEF4FF}
+\definecolor{cvchip}{HTML}{F1F4F9}
+
+\newcommand{\cvsep}{\ \textperiodcentered\ }
+\newcommand{\cvtitlesep}{\hspace{0.45em}}
+\newcommand{\cvlinksep}{\par\vspace{0.25em}}
+
+% the titles come joined by \cvtitlesep: here it closes one pill and opens the next
+\newsavebox{\cvpillbox}
+\def\cvpillstart{\setbox\cvpillbox\hbox\bgroup\fontsize{8.6}{10}\selectfont\color{white}}
+\def\cvpillend{\egroup\tikz[baseline=(p.base)]\node[draw=cvpale!60, line width=0.6pt,
+    rounded corners=8pt, inner xsep=7pt, inner ysep=3.5pt](p){\usebox{\cvpillbox}};}
+
+% \cvcontact{icon}{url}{label}{text}: icon (if any) + the short address, linked
+\newcommand{\cvcontact}[4]{\href{#2}{%
+    \if\relax\detokenize{#1}\relax\else{\color{cvaccent}\cvicon{#1}}\hspace{0.5em}\fi#4}}
+
+\newcommand{\RenderHeader}{%
+    {\color{white}\cvheavy\fontsize{33}{36}\selectfont\addfontfeature{LetterSpace=-2.5}\HeaderName\par}%
+    \vspace{0.8em}%
+    {\def\cvtitlesep{\cvpillend\hspace{0.45em}\cvpillstart}\cvpillstart\HeaderTitles\cvpillend}\par
+}

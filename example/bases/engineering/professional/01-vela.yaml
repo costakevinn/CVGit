@@ -1,0 +1,12 @@
+title:
+  pt: Engenheiro de Dados
+  en: Data Engineer
+bullets:
+  pt:
+    - Construí pipelines de ETL em Python e SQL que integram vendas, estoque e e-commerce.
+    - Modelei o data warehouse em PostgreSQL usado pelas equipes de análise.
+    - Implementei testes de qualidade de dados que bloqueiam cargas inconsistentes.
+  en:
+    - Built Python and SQL ETL pipelines integrating sales, inventory and e-commerce data.
+    - Modeled the PostgreSQL data warehouse used by the analytics teams.
+    - Implemented data quality tests that block inconsistent loads.
